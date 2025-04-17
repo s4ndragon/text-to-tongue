@@ -1,0 +1,26 @@
+# Backend specific
+backend/credentials
+backend/.env
+backend/node_modules/
+
+# Frontend specific
+frontend/.env
+frontend/node_modules/
+
+# General
+.DS_Store
+*.log
+*.swp
+*.swo
+*.pyc
+__pycache__/
+*.sqlite3
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Python virtual environments
+venv/
+.env/
+*.venv/
