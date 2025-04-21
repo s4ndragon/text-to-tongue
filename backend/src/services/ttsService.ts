@@ -1,4 +1,3 @@
-// backend/src/services/ttsService.ts
 import textToSpeech from '@google-cloud/text-to-speech';
 import fs from 'fs';
 import path from 'path';
