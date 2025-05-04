@@ -1,6 +1,7 @@
 // LanguageLearningResult.tsx
 import { useState, useRef, useEffect } from "react";
 import { TTSResponse } from "../services/ttsService";
+import ExactTranslation from "./ExactTranslation";
 
 interface LanguageLearningResultProps {
   result: TTSResponse | null;
@@ -72,65 +73,69 @@ const LanguageLearningResult = ({ result }: LanguageLearningResultProps) => {
         {activeTab === "pronunciation" && (
           <div className="pronunciation-section">
             <h3>Pronunciation Practice</h3>
-            <p className="original-text">{result.text}</p>
-            <div className="audio-controls">
-              <audio ref={audioRef} onEnded={handleAudioEnded} controls>
-                <source src={audioUrl} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
 
-              <div className="playback-controls">
-                <div className="audio-buttons">
-                  <button onClick={togglePlayPause} className="play-button">
-                    <span className={`icon ${isPlaying ? "pause" : "play"}`}></span>
-                    {isPlaying ? "Pause" : "Play"}
-                  </button>
-                  <a href={audioUrl} download={`pronunciation-${languageName}.mp3`} className="download-button">
-                    <span className="icon download"></span>
-                    Download
-                  </a>
-                </div>
+            <div className="original-text-container">
+              <div className="text-header">
+                <h4>Text to Practice</h4>
+                <span className="language-indicator">{languageName}</span>
+              </div>
+              <div className="original-text">{result.text}</div>
+            </div>
 
-                <div className="speed-controls">
-                  <span>Playback Speed:</span>
-                  <div className="speed-buttons">
-                    <button className={playbackRate === 0.5 ? "active" : ""} onClick={() => changePlaybackRate(0.5)}>
-                      0.5x
+            <div className="audio-section">
+              <h4>Audio Controls</h4>
+              <div className="audio-controls">
+                <audio ref={audioRef} onEnded={handleAudioEnded} controls>
+                  <source src={audioUrl} type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+
+                <div className="playback-controls">
+                  <div className="audio-buttons">
+                    <button onClick={togglePlayPause} className="play-button">
+                      <span className={`icon ${isPlaying ? "pause" : "play"}`}></span>
+                      {isPlaying ? "Pause" : "Play"}
                     </button>
-                    <button className={playbackRate === 0.75 ? "active" : ""} onClick={() => changePlaybackRate(0.75)}>
-                      0.75x
-                    </button>
-                    <button className={playbackRate === 1.0 ? "active" : ""} onClick={() => changePlaybackRate(1.0)}>
-                      1.0x
-                    </button>
-                    <button className={playbackRate === 1.5 ? "active" : ""} onClick={() => changePlaybackRate(1.5)}>
-                      1.5x
-                    </button>
+                    <a href={audioUrl} download={`pronunciation-${languageName}.mp3`} className="download-button">
+                      <span className="icon download"></span>
+                      Download
+                    </a>
+                  </div>
+
+                  <div className="speed-controls">
+                    <span>Playback Speed:</span>
+                    <div className="speed-buttons">
+                      <button className={playbackRate === 0.5 ? "active" : ""} onClick={() => changePlaybackRate(0.5)}>
+                        0.5x
+                      </button>
+                      <button
+                        className={playbackRate === 0.75 ? "active" : ""}
+                        onClick={() => changePlaybackRate(0.75)}>
+                        0.75x
+                      </button>
+                      <button className={playbackRate === 1.0 ? "active" : ""} onClick={() => changePlaybackRate(1.0)}>
+                        1.0x
+                      </button>
+                      <button className={playbackRate === 1.5 ? "active" : ""} onClick={() => changePlaybackRate(1.5)}>
+                        1.5x
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="original-speed-indicator">Original Recording Speed: {result.speakingRate}x</div>
+                <div className="original-speed-indicator">Original Recording Speed: {result.speakingRate}x</div>
+              </div>
             </div>
           </div>
         )}
-
         {activeTab === "translation" && (
-          <div className="translation-section">
-            <h3>Translation</h3>
-            <div className="translation-grid">
-              <div className="original">
-                <h4>Original ({languageName})</h4>
-                <div className="text-box">{result.text}</div>
-              </div>
-              <div className="translated">
-                <h4>Translation ({targetLanguageName})</h4>
-                <div className="text-box">{result.translatedText || "No translation available"}</div>
-              </div>
-            </div>
-          </div>
+          <ExactTranslation
+            originalText={result.text}
+            originalLanguage={languageName}
+            translationText={result.translatedText || "No translation available"}
+            translationLanguage={targetLanguageName}
+          />
         )}
-
         {activeTab === "grammar" && (
           <div className="grammar-section">
             <h3>Grammar Explanation</h3>
@@ -144,7 +149,6 @@ const LanguageLearningResult = ({ result }: LanguageLearningResultProps) => {
             </div>
           </div>
         )}
-
         {activeTab === "vocabulary" && (
           <div className="vocabulary-section">
             <div className="vocabulary-column">

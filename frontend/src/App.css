@@ -1,17 +1,84 @@
 /* App.css */
+/* Theme variables in App.css */
+/* Add these theme variables to index.css */
 :root {
+  /* Light theme (default) */
   --primary-color: #4a6fa5;
   --secondary-color: #166088;
   --accent-color: #4fc3f7;
   --text-color: #333;
   --background-color: #f8f9fa;
   --card-background: #ffffff;
+  --input-background: #f8f9fa;
+  --input-border: #333;
+  --input-text: #e0e0e0;
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   --border-radius: 8px;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
+}
+
+[data-theme="dark"] {
+  --primary-color: #5f8ac2;
+  --secondary-color: #1e88e5;
+  --accent-color: #64b5f6;
+  --text-color: #e0e0e0;
+  --background-color: #121212;
+  --card-background: #1e1e1e;
+  --input-background: #1a1a1a;
+  --input-border: #444;
+  --input-text: #e0e0e0;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Add a transition for smooth theme switching */
+* {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Add to App.css */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  color: white;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-icon {
+  display: block;
+}
+
+/* Update color values in your CSS */
+.form-card {
+  background-color: var(--card-background);
+  color: var(--text-color);
+  /* other properties */
+}
+
+input,
+select,
+textarea {
+  background-color: var(--input-background);
+  border: 1px solid var(--input-border);
+  color: var(--text-color);
+  /* other properties */
 }
 
 .app {
@@ -638,6 +705,438 @@ button:disabled {
 
 .button-link:hover {
   background-color: var(--secondary-color);
+}
+
+/* Text Section Styles */
+.text-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.3;
+}
+
+.section-content {
+  margin-top: var(--spacing-md);
+}
+
+.section-content p {
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Card title styles - for when titles are inside cards */
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .card-title {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Add to App.css */
+.structured-text {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: var(--spacing-md);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .text-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.text-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.language-indicator {
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.text-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.text-paragraph {
+  margin-bottom: var(--spacing-md);
+}
+
+.text-paragraph p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.paragraph-divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin: var(--spacing-md) 0;
+}
+
+[data-theme="dark"] .paragraph-divider {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Audio section modifications for better separation */
+.pronunciation-section .original-text {
+  font-size: 1.1rem;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+  white-space: pre-line; /* Preserves line breaks */
+}
+
+.audio-controls {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.original-text-container {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: var(--spacing-lg);
+  overflow: hidden;
+}
+
+.audio-section {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: var(--spacing-md);
+}
+
+.audio-section h4 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+}
+
+/* Add to App.css */
+.structured-translation {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.translation-header {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .translation-header {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.language-column {
+  flex: 1;
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.language-column:first-child {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .language-column:first-child {
+  border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+.language-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.translation-content {
+  padding: 0;
+}
+
+.translation-paragraph-pair {
+  display: flex;
+}
+
+.paragraph-container {
+  flex: 1;
+  padding: var(--spacing-md);
+}
+
+.paragraph-container.original {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+[data-theme="dark"] .paragraph-container.original {
+  border-right-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.paragraph-container p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.translation-paragraph-pair .paragraph-divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+[data-theme="dark"] .translation-paragraph-pair .paragraph-divider {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .translation-header {
+    flex-direction: column;
+  }
+
+  .language-column:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  [data-theme="dark"] .language-column:first-child {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .translation-paragraph-pair {
+    flex-direction: column;
+  }
+
+  .paragraph-container.original {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  [data-theme="dark"] .paragraph-container.original {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Add to App.css */
+.translation-section h3 {
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.translation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.translation-column {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.translation-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .translation-title {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.translation-title h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.language-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #4fc3f7;
+  color: white;
+  font-size: 0.8rem;
+  text-transform: lowercase;
+}
+
+.translation-content {
+  padding: var(--spacing-md);
+}
+
+.translation-paragraph {
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.translation-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .translation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .translation-column:first-child {
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+/* Add to App.css */
+.translation-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.exact-translation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background-color: #f0f0f0;
+}
+
+[data-theme="dark"] .exact-translation-grid {
+  background-color: #2a2a2a;
+}
+
+.translation-panel {
+  background-color: var(--card-background);
+  display: flex;
+  flex-direction: column;
+}
+
+.translation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eaeaea;
+}
+
+[data-theme="dark"] .translation-header {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+}
+
+.translation-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+[data-theme="dark"] .translation-header h4 {
+  color: #eaeaea;
+}
+
+.language-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #4fc3f7;
+  color: white;
+  font-size: 0.8rem;
+}
+
+.translation-body {
+  padding: 1rem;
+  flex: 1;
+}
+
+.translation-paragraph {
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.translation-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.translation-text {
+  white-space: pre-line; /* Preserves line breaks */
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .exact-translation-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {

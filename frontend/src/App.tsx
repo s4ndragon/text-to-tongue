@@ -2,6 +2,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import History from "./pages/History";
+import ThemeToggle from "./components/ThemeToggle";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Link to="/history" className="nav-link">
               History
             </Link>
+            <ThemeToggle />
           </nav>
         </header>
 

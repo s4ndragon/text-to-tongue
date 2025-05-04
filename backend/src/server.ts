@@ -13,21 +13,20 @@ connectDB();
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// CORS Middleware - Fix: Configure CORS before other middleware
+app.use(cors({
+  origin: process.env.CLIENT_URL || "http://localhost:3000", // Vite dev server address
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Other Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the uploads directory
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
-
-// backend/src/server.ts
-app.use(
-  cors({
-    origin: "http://localhost:3000", // Vite dev server address
-    credentials: true,
-  })
-);
 
 // API Routes
 app.use("/api/tts", ttsRoutes);
@@ -38,7 +37,7 @@ app.get("/", (req, res) => {
 });
 
 // Set port and start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001; // Changed to 5001 to match your client's request
 
 app.listen(PORT, () => {
   console.log(`Server running in development mode on port ${PORT}`);
