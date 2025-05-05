@@ -27,8 +27,28 @@ export const convertTextToSpeech = async (req: Request, res: Response): Promise<
       translatedText = await translateText(text, targetLanguage);
     }
 
-    // Analyze text for language learning
-    const { grammarNotes, keyVocabulary, importantPhrases } = await analyzeText(text, language, targetLanguage);
+    // Only analyze text if the content is not too long
+    // This helps control API costs and response times
+    let grammarNotes = "";
+    let keyVocabulary: string[] = [];
+    let importantPhrases: string[] = [];
+
+    if (text.length <= 1000) {
+      // Limit analysis to texts under 1000 characters
+      try {
+        console.log("try");
+        const analysisResult = await analyzeText(text, language, targetLanguage);
+        console.log("Analysis result:", analysisResult);
+        grammarNotes = analysisResult.grammarNotes;
+        keyVocabulary = analysisResult.keyVocabulary;
+        importantPhrases = analysisResult.importantPhrases;
+      } catch (analysisError) {
+        console.error("Error during text analysis:", analysisError);
+        // Continue with empty analysis results if there's an error
+      }
+    } else {
+      grammarNotes = "Text too long for detailed analysis. Try with a shorter text (under 1000 characters).";
+    }
 
     // Save to database
     const ttsRequest = new TextToSpeech({
@@ -71,7 +91,6 @@ export const convertTextToSpeech = async (req: Request, res: Response): Promise<
     });
   }
 };
-
 
 export const getTextToSpeechHistory = async (req: Request, res: Response): Promise<void> => {
   try {

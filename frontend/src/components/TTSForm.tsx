@@ -35,6 +35,7 @@ const TTSForm = ({ onConversionSuccess, onConversionError }: TTSFormProps) => {
       };
 
       const response = await convertTextToSpeech(request);
+      console.log("response:", response);
       onConversionSuccess(response);
     } catch (error) {
       console.error("Error converting text to speech:", error);
