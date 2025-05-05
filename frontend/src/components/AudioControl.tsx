@@ -74,6 +74,14 @@ const AudioControl: React.FC<AudioControlProps> = ({
     }
   };
 
+  const speedController = [
+    { label: "0.5x", value: 0.5 },
+    { label: "0.75x", value: 0.75 },
+    { label: "1.0x", value: 1.0 },
+    { label: "1.5x", value: 1.5 },
+    { label: "2.0x", value: 2.0 },
+  ];
+
   return (
     <div className="audio-control">
       <audio
@@ -115,21 +123,15 @@ const AudioControl: React.FC<AudioControlProps> = ({
         <div className="speed-controls">
           <span>Speed:</span>
           <div className="speed-buttons">
-            <button className={playbackRate === 0.5 ? "active" : ""} onClick={() => changePlaybackRate(0.5)}>
-              0.5x
-            </button>
-            <button className={playbackRate === 0.75 ? "active" : ""} onClick={() => changePlaybackRate(0.75)}>
-              0.75x
-            </button>
-            <button className={playbackRate === 1.0 ? "active" : ""} onClick={() => changePlaybackRate(1.0)}>
-              1.0x
-            </button>
-            <button className={playbackRate === 1.5 ? "active" : ""} onClick={() => changePlaybackRate(1.5)}>
-              1.5x
-            </button>
-            <button className={playbackRate === 2.0 ? "active" : ""} onClick={() => changePlaybackRate(2.0)}>
-              2.0x
-            </button>
+            {speedController.map((speed) => {
+              return (
+                <button
+                  className={playbackRate === speed.value ? "active" : ""}
+                  onClick={() => changePlaybackRate(speed.value)}>
+                  {speed.label}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
